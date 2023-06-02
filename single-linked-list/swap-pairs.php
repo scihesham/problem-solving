@@ -14,7 +14,7 @@ require_once 'single-linked-list.php';
             if($current->next){
                 /** swapping data */
                 list($current->data, $current->next->data) = array($current->next->data, $current->data);
-                $current=$current->next;
+                $current = $current->next;
             }
         }
     }

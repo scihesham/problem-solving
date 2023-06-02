@@ -4,17 +4,18 @@ declare(strict_types = 1);
 class Node{
     public mixed $data;
     public Node|null $next = null;
+    public Node|null $prev = null;
 
-    function __construct(mixed $data) {
+    function __construct(mixed $data){
         $this->data = $data;
     }
 }
 
-class LinkedList{
-    protected  Node|null $head = null;
-    protected  Node|null $tail = null;
+class DoublyLinkedList{
+    protected Node|null $head = null;
+    protected Node|null $tail = null;
 
-    public function print(): void {
+    public function print(){
         $current = $this->head;
         while($current){
             echo $current->data . " ";
@@ -22,12 +23,22 @@ class LinkedList{
         }
     }
 
+    public function printReversed(){
+        $current = $this->tail;
+        while($current){
+            echo $current->data . " ";
+            $current = $current->prev;
+        }
+    }
+
     public function insertEnd(mixed $n): void {
         $node = new Node($n);
         /** if linked list not empty */
         if($this->head){
+            $tmp = $this->tail;
             $this->tail->next = $node;
             $this->tail = $node;
+            $this->tail->prev = $tmp;
         }
         /** if linked list empty */
         else{
@@ -53,15 +64,19 @@ class LinkedList{
             $this->deleteNode($node_before);
         }
     }
+
     /**
      * @param Node $node => head or node_previos
-     */
+    */
     public function deleteNode(Node $node, bool $is_head=false): void{
         if($is_head){
             $this->head = $node->next;
             /** if the list was a single node */
             if(! $this->head){
                 $this->tail = null;
+            }
+            else{
+                $this->head->prev = null;
             }
         }
         else{
@@ -76,21 +91,21 @@ class LinkedList{
 
 }
 
-// $linked_list = new LinkedList();
-// $linked_list->insertEnd(4);
-// $linked_list->insertEnd(6);
-// $linked_list->insertEnd(8);
-// $linked_list->insertEnd(10);
+$linked_list = new DoublyLinkedList();
+$linked_list->insertEnd(4);
+$linked_list->insertEnd(6);
+$linked_list->insertEnd(8);
+$linked_list->insertEnd(10);
 
-// $linked_list->print();
-// echo "<br>";
-// $linked_list->deleteNthNode(3);
-// $linked_list->print();
-// echo "<br>";
-// $linked_list->insertEnd(20);
-// $linked_list->insertEnd(50);
-// $linked_list->print();
-// echo "<br>";
-// $linked_list->deleteNthNode(1);
-// $linked_list->print();
-// echo "<br>";
+$linked_list->print();
+echo "<br>";
+$linked_list->deleteNthNode(3);
+$linked_list->print();
+echo "<br>";
+$linked_list->insertEnd(20);
+$linked_list->insertEnd(50);
+$linked_list->print();
+echo "<br>";
+$linked_list->deleteNthNode(1);
+$linked_list->print();
+echo "<br>";
