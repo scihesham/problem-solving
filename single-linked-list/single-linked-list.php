@@ -11,8 +11,8 @@ class Node{
 }
 
 class LinkedList{
-    private Node|null $head = null;
-    private Node|null $tail = null;
+    protected  Node|null $head = null;
+    protected  Node|null $tail = null;
 
     public function print(): void {
         $current = $this->head;
@@ -76,21 +76,21 @@ class LinkedList{
 
 }
 
-$linked_list = new LinkedList();
-$linked_list->insertEnd(4);
-$linked_list->insertEnd(6);
-$linked_list->insertEnd(8);
-$linked_list->insertEnd(10);
+// $linked_list = new LinkedList();
+// $linked_list->insertEnd(4);
+// $linked_list->insertEnd(6);
+// $linked_list->insertEnd(8);
+// $linked_list->insertEnd(10);
 
-$linked_list->print();
-echo "<br>";
-$linked_list->deleteNthNode(3);
-$linked_list->print();
-echo "<br>";
-$linked_list->insertEnd(20);
-$linked_list->insertEnd(50);
-$linked_list->print();
-echo "<br>";
-$linked_list->deleteNthNode(1);
-$linked_list->print();
-echo "<br>";
+// $linked_list->print();
+// echo "<br>";
+// $linked_list->deleteNthNode(3);
+// $linked_list->print();
+// echo "<br>";
+// $linked_list->insertEnd(20);
+// $linked_list->insertEnd(50);
+// $linked_list->print();
+// echo "<br>";
+// $linked_list->deleteNthNode(1);
+// $linked_list->print();
+// echo "<br>";
