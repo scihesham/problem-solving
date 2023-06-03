@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+require_once '../pretty.php';
 
 class Node{
     public mixed $data;
