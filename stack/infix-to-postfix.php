@@ -1,7 +1,5 @@
 <?php
 
-use Solution as GlobalSolution;
-
 require_once 'stack-linked.php';
 
 /**
