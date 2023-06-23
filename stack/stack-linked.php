@@ -32,6 +32,10 @@ class Stack{
         return $this->head->data;
     }
 
+    public function isEmpty(): bool{
+        return !$this->head;
+    }
+
     public function display(){
         for($temp=$this->head; $temp; $temp=$temp->next){
             echo $temp->data. ' ';
