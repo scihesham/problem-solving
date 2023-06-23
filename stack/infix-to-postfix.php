@@ -6,6 +6,8 @@ require_once 'stack-linked.php';
 
 /**
  *  convert infix to postfix
+ *  consider operators => +, -, *, /
+ *  consider parentheses ()
  */
 
 class Solution
@@ -32,6 +34,15 @@ class Solution
                 $postfix .= $char;
             }
             /** if operator */
+            else if($char == '('){
+                $operators->push($char);
+            }
+            else if($char == ')'){
+                while($operators->peek() != '('){
+                    $postfix .= $operators->pop();
+                }
+                $operators->pop();
+            }
             else{
                 while(!$operators->isEmpty() && ($this->precedence($operators->peek()) >= $this->precedence($char))){
                     $postfix .= $operators->pop();
@@ -50,5 +61,6 @@ class Solution
 }
 
 $solution = new Solution();
-$infix = '1+3*5-8/2';
+// $infix = '1+3*5-8/2';
+$infix = '2+3-((5+2)*3)';
 echo $solution->infixToPostfix($infix);
