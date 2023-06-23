@@ -34,16 +34,14 @@ class Solution
             /** if operator */
             else{
                 while(!$operators->isEmpty() && ($this->precedence($operators->peek()) >= $this->precedence($char))){
-                    $operator = $operators->pop();
-                    $postfix .= $operator;
+                    $postfix .= $operators->pop();
                 }
                 $operators->push($char);
             }
         }
 
         while(!$operators->isEmpty()){
-            $operator = $operators->pop();
-            $postfix .= $operator;
+            $postfix .= $operators->pop();
         }
 
         return $postfix;
