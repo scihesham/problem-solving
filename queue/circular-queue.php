@@ -3,18 +3,18 @@ declare(strict_types = 1);
 require_once '../pretty.php';
 
 class CircularQueue{
-    private SplFixedArray $array;
-    private int $front = -1;
-    private int $rear = -1;
-    private int $added_elements = 0;
-    private int $array_size = 0;
+    protected SplFixedArray $array;
+    protected int $front = -1;
+    protected int $rear = -1;
+    protected int $added_elements = 0;
+    protected int $array_size = 0;
 
     function __construct(int $array_size) {
         $this->array = new SplFixedArray($array_size);
         $this->array_size = $array_size; 
     }
 
-    private function next($index): int{
+    public function next($index): int{
         if($index == $this->array_size - 1){
             return 0;
         }
@@ -56,12 +56,12 @@ class CircularQueue{
 
 }
 
-$queue = new CircularQueue(5);
-$queue->enqueue(10);
-$queue->enqueue(20);
-$queue->dequeue();
-$queue->enqueue(200);
-$queue->enqueue(300);
-$queue->enqueue(700);
-$queue->enqueue(800);
-$queue->display();
+// $queue = new CircularQueue(5);
+// $queue->enqueue(10);
+// $queue->enqueue(20);
+// $queue->dequeue();
+// $queue->enqueue(200);
+// $queue->enqueue(300);
+// $queue->enqueue(700);
+// $queue->enqueue(800);
+// $queue->display();
