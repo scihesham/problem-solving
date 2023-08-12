@@ -23,6 +23,24 @@ class LinkedList{
         }
     }
 
+    public function size(): int {
+        $size = 0;
+        $current = $this->head;
+        while($current){
+            $size++;
+            $current = $current->next;
+        }
+        return $size;
+    }
+
+    public function getHead(): ?Node{
+        return $this->head;
+    }
+
+    public function isEmpty(): bool{
+        return $this->head ? false: true;
+    }
+
     public function insertEnd(mixed $n): void {
         $node = new Node($n);
         /** if linked list not empty */
@@ -36,7 +54,7 @@ class LinkedList{
         }
     }
 
-    public function getNthNode(int $index): null|Node {
+    public function getNthNode(int $index): ?Node {
         $cnt = 0;
         for($current=$this->head; $current; $current = $current->next){
             if(++$cnt == $index) return $current;

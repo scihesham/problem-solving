@@ -13,7 +13,7 @@ require_once 'tree.php';
 
 class Solution
 {
-    function hasPathSum(TreeNode|null $root, int $targetSum): bool
+    function hasPathSum(?TreeNode $root, int $targetSum): bool
     {
         if (!$root) return false;
         if ($this->isLeaf($root) && ($targetSum == $root->val)) {
@@ -27,7 +27,7 @@ class Solution
         return $l || $r;
     }
 
-    function isLeaf(TreeNode|null $node): bool
+    function isLeaf(?TreeNode $node): bool
     {
         return $node && !$node->left && !$node->right;
     }
