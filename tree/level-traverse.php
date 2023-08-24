@@ -8,9 +8,9 @@ require_once '../queue/queue-linked.php';
 /**
  * Print nodes level by level, knowing level
  */
-
 class Solution
 {
+
     public Queue $queue;
 
     function __construct()
@@ -25,8 +25,8 @@ class Solution
         $levels_num = 0;
         $this->queue->enqueue($root);
         while (!$this->queue->isEmpty()) {
-            $queue_size = $this->queue->size();
-            while ($queue_size) {
+            $level_nodes_num = $this->queue->size();
+            while ($level_nodes_num) {
                 $current = $this->queue->front();
                 $this->queue->dequeue();
                 echo $current->data->val . " ";
@@ -36,11 +36,12 @@ class Solution
                 if ($current->data->right) {
                     $this->queue->enqueue($current->data->right);
                 }
-                $queue_size--;
+                $level_nodes_num--;
             }
             $levels_num++;
         }
     }
+
 }
 
 $tree = new BinaryTree(1);
