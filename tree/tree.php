@@ -152,6 +152,55 @@ class BinaryTree
             }
 	}
 
+    public function min_val(?TreeNode $current): ?TreeNode{
+        if(!$current) return null;
+        while($current->left){
+            $current = $current->left;
+        }
+        return $current;
+    }
+
+    public function find_chain(?TreeNode $current, int $target, array &$arr): bool{
+        if(!$current) return false;
+
+        $arr[] = $current;
+
+        if($target == $current->val) return true;
+
+        if($target > $current->val){
+            return self::find_chain($current->right, $target, $arr);
+        }
+        else{
+            return self::find_chain($current->left, $target, $arr);
+        }
+    }
+
+    public function successor(int $target): ?int{
+        $arr = array();
+        $find_chain_res = self::find_chain($this->root, $target, $arr);
+        if(! $find_chain_res) return null;
+
+        $current = array_pop($arr);
+        if($current->right){
+          return self::min_val($current->right)->val;
+        }
+
+        $parent = array_pop($arr);
+        while($parent && $parent->right == $current){
+            $current = $parent;
+            $parent = array_pop($arr);
+        }
+
+        if($parent){
+            return $parent->val;
+        }
+        else{
+            return null;
+        }
+
+    }
+
+
 
 }
 
@@ -214,4 +263,17 @@ function test5()
     $tree->print_inorder(); // 10 12 20 30 40 50 70
 }
 
-// test5();
+
+function testSuccessor()
+{
+    $tree = new BinaryTree(50);
+    $tree->add([30, 10, 12], ['L', 'L', 'R']);
+    $tree->insert_bst(40);
+    $tree->insert_bst(20);
+    $tree->insert_bst(70);
+    $tree->print_inorder(); // 10 12 20 30 40 50 70
+    echo "<br>";
+    echo $tree->successor(50) ?? 'not found';
+}
+
+testSuccessor();
