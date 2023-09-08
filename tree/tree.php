@@ -152,7 +152,7 @@ class BinaryTree
             }
 	}
 
-    public function min_val(?TreeNode $current): ?TreeNode{
+    public function min_node(?TreeNode $current): ?TreeNode{
         if(!$current) return null;
         while($current->left){
             $current = $current->left;
@@ -182,7 +182,7 @@ class BinaryTree
 
         $current = array_pop($arr);
         if($current->right){
-          return self::min_val($current->right)->val;
+          return self::min_node($current->right)->val;
         }
 
         $parent = array_pop($arr);
@@ -200,7 +200,40 @@ class BinaryTree
 
     }
 
+    public function delete_node(int $target): void{
+        self::_delete_node($this->root, $target);
+    }
 
+    public function _delete_node(?TreeNode $current, int $target): ?TreeNode{
+        /** find the node */
+        if(! $current) return null;
+
+        if($target > $current->val){
+            $current->right = self::_delete_node($current->right, $target);
+        }
+        else if($target < $current->val){
+            $current->left = self::_delete_node($current->left, $target);
+        }
+        else{
+            /** if leaf node */
+            if(! $current->left && ! $current->right){
+                $current = null;
+            }
+            else if(! $current->left){
+                $current = $current->right;
+            }
+            else if(! $current->right){
+                $current = $current->left;
+            }
+            /** if node has 2 children use successor */
+            else{
+                $min_val = self::min_node($current->right)->val;
+                $current->val = $min_val;
+                $current->right = self::_delete_node($current->right, $min_val);
+            }
+        }
+        return $current;
+    }
 
 }
 
@@ -276,4 +309,18 @@ function testSuccessor()
     echo $tree->successor(50) ?? 'not found';
 }
 
-testSuccessor();
+function deleteNode()
+{
+    $tree = new BinaryTree(50);
+    $tree->add([30, 10, 12], ['L', 'L', 'R']);
+    $tree->insert_bst(40);
+    $tree->insert_bst(20);
+    $tree->insert_bst(70);
+    $tree->print_inorder(); // 10 12 20 30 40 50 70
+    echo "<br>";
+    $tree->delete_node(30); // 10 12 20 40 50 70
+    $tree->print_inorder(); 
+    echo "<br>";
+}
+
+// deleteNode();
