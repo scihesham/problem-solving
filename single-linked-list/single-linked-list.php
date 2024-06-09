@@ -38,7 +38,7 @@ class LinkedList{
     }
 
     public function isEmpty(): bool{
-        return $this->head ? false: true;
+        return $this->head ? false : true;
     }
 
     public function insertEnd(mixed $n): void {
@@ -73,7 +73,7 @@ class LinkedList{
         }
     }
     /**
-     * @param Node $node => head or node_previos
+     * @param Node $node => head or node_previous
      */
     public function deleteNode(Node $node, bool $is_head=false): void{
         if($is_head){

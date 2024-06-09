@@ -4,7 +4,7 @@ require_once '../pretty.php';
 
 class Node{
     public mixed $data;
-    public Node|null $next = null;
+    public ?Node $next = null;
 
     function __construct(mixed $data) {
         $this->data = $data;
@@ -12,7 +12,7 @@ class Node{
 }
 
 class Stack{
-    protected Node|null $head = null;
+    protected ?Node $head = null;
 
     public function push(mixed $val): void{
         $node = New Node($val);

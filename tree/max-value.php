@@ -13,16 +13,11 @@ require_once 'tree.php';
 
 class Solution {
 
-    public function maxValue(TreeNode $root): int{
-        $max_val = $root->val;
-        return $this->_maxValue($root, $max_val);
-    }
-
-    public function _maxValue(TreeNode|null $current, mixed $max_val): int{
+    public function maxValue(TreeNode|null $current): int{
         if(! $current) return 0;
 
-        $l = self::_maxValue($current->left, $max_val);
-        $r = self::_maxValue($current->right, $max_val);
+        $l = self::maxValue($current->left);
+        $r = self::maxValue($current->right);
         return max($current->val, max($l, $r));
     }
 
