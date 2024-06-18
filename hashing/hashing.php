@@ -23,6 +23,20 @@ class Hashing
     }
 }
 
-$hashing = new Hashing();
+class PhoneEntry{
+	public string $name;			// key
+	public string $phone_number;	// data
+
+    public function __construct(string $name, string $phone_number)
+    {
+        $this->name = $name;
+        $this->phone_number = $phone_number;
+    }
+}
+
+
+
+// $hashing = new Hashing();
 // echo $hashing->hashString(str: 'abcde', size: 26);
-echo $hashing->hashNum(number: 20, size: 2147483647);
+// echo $hashing->hashNum(number: 20, size: 2147483647);
+
